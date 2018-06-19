@@ -1,6 +1,5 @@
-vendor
-coverage
-
-web/data/*
-
-log/*.log
+/vendor
+/coverage
+/web/data/*
+/log/*.log
+/docker-compose.yml
