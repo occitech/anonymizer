@@ -1,0 +1,10 @@
+logger:
+  enabled: true
+dump_server:
+  path: /anonymizer/dump/
+database:
+  user: root
+  host: db
+  pass: root
+web_data_path: /anonymizer/web/data
+tmp_path: /anonymizer/tmp
