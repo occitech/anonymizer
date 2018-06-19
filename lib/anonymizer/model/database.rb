@@ -13,6 +13,7 @@ class Database
   end
 
   def anonymize
+    remove_fake_data
     insert_fake_data
 
     @config['tables'].each do |table_name, columns|
@@ -107,9 +108,9 @@ class Database
 
   def prepare_select_for_query(type)
     query = if type == 'email'
-              "SELECT REPLACE(fake_user.email, '$uniq$', CONCAT('+', UUID_SHORT())) "
+              "SELECT REPLACE(fake_user.email, '$uniq$', CONCAT('+', CONCAT(NOW(), RAND(), UUID()))) "
             elsif type == 'login'
-              "SELECT REPLACE(fake_user.login, '$uniq$', CONCAT('+', UUID_SHORT())) "
+              "SELECT REPLACE(fake_user.login, '$uniq$', CONCAT('+', CONCAT(NOW(), RAND(), UUID()))) "
             elsif type == 'fullname'
               "SELECT CONCAT_WS(' ', fake_user.firstname, fake_user.lastname) "
             else
