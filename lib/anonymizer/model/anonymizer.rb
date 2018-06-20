@@ -56,7 +56,7 @@ class Anonymizer
   end
 
   def validate_column(_column_name, info)
-    raise 'In project config file founded column without defined action' unless info['action']
+    raise "In project config file founded column #{_column_name} without defined action" unless info["action"]
   end
 
   def read_config(project_file_path)

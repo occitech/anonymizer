@@ -13,7 +13,6 @@ class Database
   end
 
   def anonymize
-    remove_fake_data
     insert_fake_data
 
     @config['tables'].each do |table_name, columns|
@@ -47,6 +46,11 @@ class Database
   end
 
   def anonymize_column_query(table_name, column_name, column_type)
+    if table_name == "core_config_data"
+      query = anonymize_core_config_query(column_name, column_type)
+      return query
+    end
+
     query = "UPDATE #{table_name} SET #{column_name} = ("
 
     if column_type == 'id'
@@ -59,6 +63,13 @@ class Database
 
     query << "WHERE #{table_name}.#{column_name} IS NOT NULL"
 
+    query
+  end
+
+  def anonymize_core_config_query(path, type)
+   if type == 'email'
+     query = "UPDATE core_config_data SET value = 'admin@example.com' WHERE path = '#{path}'"
+    end
     query
   end
 
@@ -113,6 +124,8 @@ class Database
               "SELECT REPLACE(fake_user.login, '$uniq$', CONCAT('+', CONCAT(NOW(), RAND(), UUID()))) "
             elsif type == 'fullname'
               "SELECT CONCAT_WS(' ', fake_user.firstname, fake_user.lastname) "
+            elsif type == 'telephone'
+              "SELECT '0000000000' "
             else
               "SELECT fake_user.#{type} "
             end
