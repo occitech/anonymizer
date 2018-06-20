@@ -115,6 +115,20 @@
         "action": "update"
       }
     },
+    "sales_shipment_grid": {
+      "customer_email": {
+        "type": "email",
+        "action": "update"
+      },
+      "billing_name": {
+        "type": "fullname",
+        "action": "update"
+      },
+      "shipping_name": {
+        "type": "fullname",
+        "action": "update"
+      }
+    },
     "customer_address_entity": {
       "city": {
         "type": "city",
@@ -167,6 +181,14 @@
     },
     "sales_invoice_grid": {
       "billing_name": {
+        "type": "fullname",
+        "action": "update"
+      },
+      "customer_email": {
+        "type": "email",
+        "action": "update"
+      },
+      "customer_name": {
         "type": "fullname",
         "action": "update"
       }
