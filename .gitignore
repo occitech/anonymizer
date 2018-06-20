@@ -4,3 +4,4 @@
 /log/*.log
 /docker-compose.yml
 /config/project
+/tmp
