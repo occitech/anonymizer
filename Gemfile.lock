@@ -81,7 +81,7 @@ DEPENDENCIES
   faker!
   mysql
   net-scp
-  rake
+  rake (~> 12.3.1)
   rspec (~> 3.0)
   rubocop
   sequel
