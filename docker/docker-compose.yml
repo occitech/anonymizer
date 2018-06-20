@@ -1,12 +1,20 @@
 version: '3'
 services:
+
   ruby:
-    image: ruby:2.1
+    build: ./docker/ruby
     volumes:
-      - "../../:/usr/src/anonymizer"
+      - ./:/wd
+    links:
+      - mysql
     depends_on:
       - mysql
     command: ['bash', '-c', 'sleep 3600']
+    working_dir: /wd
+    environment:
+      BUNDLE_APP_CONFIG: /wd/.bundle
+      RUBY_ENV: development
+
   mysql:
     image: mysql:5.7
     ports:
@@ -15,11 +23,11 @@ services:
       MYSQL_DATABASE: anonymizer
       MYSQL_USER: anonymizer
       MYSQL_PASSWORD: anonymizer
-      MYSQL_ROOT_PASSWORD: anonymizer
-  postfix:
-    image: catatnight/postfix
+      MYSQL_ROOT_PASSWORD: root
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:db
     ports:
-      - 25
-    environment:
-      maildomain: divante.pl
-      smtp_user: anonymizer:password
+      - 8080:80
