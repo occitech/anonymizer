@@ -1,10 +1,10 @@
 logger:
   enabled: true
 dump_server:
-  path: /anonymizer/dump/
+  path: /wd/dump
 database:
   user: root
-  host: db
+  host: mysql
   pass: root
-web_data_path: /anonymizer/web/data
-tmp_path: /anonymizer/tmp
+web_data_path: ./web/data
+tmp_path: /wd/tmp
