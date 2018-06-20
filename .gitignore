@@ -3,3 +3,4 @@
 /web/data/*
 /log/*.log
 /docker-compose.yml
+/config/project
