@@ -16,7 +16,7 @@ services:
       RUBY_ENV: development
 
   mysql:
-    image: mysql:5.7
+    image: mariadb:10.2.13
     ports:
       - 3306
     environment:

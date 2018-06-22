@@ -6,6 +6,19 @@ Anonymizer is a universal tool to create anonymized DBs for projects.
 Why is it so important to work with anonymized databases? In the development process, you should never use your production database - it is risky and against the law. Working with a production database in development is risky, because by some mistake, you can might make your clients data available to the whole world. In our world, general data is one of most valuable things and EU tries to protect citizens' general data via the General Data Protection Regulation (GDPR).
 
 Some more quick wins for GDPR? Take a look at our [recent blog post](https://www.linkedin.com/pulse/gdpr-quick-wins-software-developers-teams-piotr-karwatka/?published=t).
+## TL;DR
+
+- Clone the repository: `git clone git@github.com:occitech/anonymizer.git`
+- Enter it and install dependencies: `cd anonymizer && make install`
+- Ensure directories exist: `mkdir -p tmp config/project`
+- Put your SQL dumps in the `tmp` directory (e.g: `foo_prod.sql.gz`)
+- Put the related project configuration file in `config/project` — name must
+  match the dump name (e.g: `foo_prod.json`)
+- Run `make run {{project_name}}` (e.g: `make run foo_prod`)… and grab a
+  :coffee:
+- :tada: Voilà! Your dump is now longer in `tmp` but an anonymized version is in
+  `web/data` (e.g: `web/data/foo_prod8aie0873109.sql.gz`) and logs in `log` (if
+  all went fine the logfile is empty, no worries)
 
 ## How does Anonymizer work?
 Anonymizer replaces all data in your database by anonymized random data. The most important feature of Anonymizer is data formatting. All generated data is similar to the original data used by real users. The example below shows anonymized data in a Magento 1 sales_flat_quote_address table.

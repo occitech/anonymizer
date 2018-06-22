@@ -1,4 +1,4 @@
-SHELL=/bin/bash
+SHELL=env bash
 
 SUPPORTED_COMMANDS := bundle run
 
