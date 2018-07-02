@@ -97,6 +97,12 @@
         "action": "update"
       }
     },
+    "sales_order_payment": {
+      "additional_information": {
+        "type": "json",
+        "action": "update"
+      }
+    },
     "sales_order": {
       "customer_email": {
         "type": "email",

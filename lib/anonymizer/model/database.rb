@@ -37,6 +37,8 @@ class Database
         info['attributes'].each do |attribute|
           querys.push anonymize_eav_query(table_name, column_name, attribute)
         end
+      elsif info['action'] == 'raw'
+        querys.push info['type']
       else
         querys.push anonymize_column_query(table_name, column_name, info['type'])
       end
@@ -119,13 +121,15 @@ class Database
 
   def prepare_select_for_query(type)
     query = if type == 'email'
-              "SELECT REPLACE(fake_user.email, '$uniq$', CONCAT('+', CONCAT(NOW(), RAND(), UUID()))) "
+              "SELECT REPLACE(fake_user.email, '$uniq$', RAND(NOW())) "
             elsif type == 'login'
-              "SELECT REPLACE(fake_user.login, '$uniq$', CONCAT('+', CONCAT(NOW(), RAND(), UUID()))) "
+              "SELECT REPLACE(fake_user.login, '$uniq$', RAND(NOW())) "
             elsif type == 'fullname'
               "SELECT CONCAT_WS(' ', fake_user.firstname, fake_user.lastname) "
             elsif type == 'telephone'
               "SELECT '0000000000' "
+            elsif type == 'json'
+              "SELECT '{}' "
             else
               "SELECT fake_user.#{type} "
             end
